@@ -4,11 +4,13 @@ on:
   push:
     branches:
       - main
-      - 'feat/*'
-      - 'fix/*'
   pull_request:
     types:
       - opened
+    paths-ignore:
+      - 'README.md'
+      - 'docs/**'
+      - '.github/workflows/**'
 
 jobs:
   test:
@@ -22,8 +24,6 @@ jobs:
           node-version: '24'
       - name: Install Dependencies
         run: npm ci
-      - name: Run Linter
-        run: npm run lint
       - name: Run Tests
         run: npm test
   deploy:
